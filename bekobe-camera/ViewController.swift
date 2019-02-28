@@ -84,10 +84,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 let transform = result.worldTransform
                 let thirdColumn = transform.columns.3
                 
-                // Create a new scene
+                // Create a new 3d object
                 let scene = SCNScene(named: "bekobe.scnassets/bekobe.scn")!
                 let item = scene.rootNode.childNode(withName: "bekobe", recursively: true)!
                 item.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+                if let camera = sceneView.pointOfView {
+                    item.eulerAngles.y = camera.eulerAngles.y
+                }
                 sceneView.scene.rootNode.addChildNode(item)
             }
         }
