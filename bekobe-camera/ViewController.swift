@@ -35,6 +35,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
+        
+        // Add horizontal plane detection
+        configuration.planeDetection = .horizontal
+
+        // Show debug options
+        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -57,6 +63,43 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
+
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else {
+            print("Error: This anchor is not ARPlaneAnchor. [\(#function)]")
+            return
+        }
+        
+        let planeGeometory = SCNPlane(width: CGFloat(planeAnchor.extent.x),
+                                      height: CGFloat(planeAnchor.extent.z))
+        
+        planeGeometory.materials.first?.diffuse.contents = UIColor.white
+        
+        let geometryPlaneNode = SCNNode(geometry: planeGeometory)
+        geometryPlaneNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
+        geometryPlaneNode.eulerAngles.x = -.pi / 2
+        geometryPlaneNode.opacity = 0.5
+        
+        node.addChildNode(geometryPlaneNode)
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as? ARPlaneAnchor else {
+            print("Error: This anchor is not ARPlaneAnchor. [\(#function)]")
+            return
+        }
+        
+        guard let geometryPlaneNode = node.childNodes.first,
+            let planeGeometory = geometryPlaneNode.geometry as? SCNPlane else {
+                print("Error: SCNPlane node is not found. [\(#function)]")
+                return
+        }
+        
+        geometryPlaneNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
+        
+        planeGeometory.width = CGFloat(planeAnchor.extent.x)
+        planeGeometory.height = CGFloat(planeAnchor.extent.z)
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
