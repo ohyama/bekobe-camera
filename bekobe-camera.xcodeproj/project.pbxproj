@@ -13,6 +13,7 @@
 		4E32B432222368FB001EF0F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E32B430222368FB001EF0F7 /* Main.storyboard */; };
 		4E32B434222368FC001EF0F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E32B433222368FC001EF0F7 /* Assets.xcassets */; };
 		4E32B437222368FC001EF0F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E32B435222368FC001EF0F7 /* LaunchScreen.storyboard */; };
+		4EAFBDCD2227D01D009D8D43 /* bekobe.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EAFBDCC2227D01D009D8D43 /* bekobe.scnassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4E32B433222368FC001EF0F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E32B436222368FC001EF0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E32B438222368FC001EF0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EAFBDCC2227D01D009D8D43 /* bekobe.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = bekobe.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				4E32B42A222368FB001EF0F7 /* AppDelegate.swift */,
 				4E32B42C222368FB001EF0F7 /* art.scnassets */,
+				4EAFBDCC2227D01D009D8D43 /* bekobe.scnassets */,
 				4E32B42E222368FB001EF0F7 /* ViewController.swift */,
 				4E32B430222368FB001EF0F7 /* Main.storyboard */,
 				4E32B433222368FC001EF0F7 /* Assets.xcassets */,
@@ -127,6 +130,7 @@
 			files = (
 				4E32B42D222368FB001EF0F7 /* art.scnassets in Resources */,
 				4E32B437222368FC001EF0F7 /* LaunchScreen.storyboard in Resources */,
+				4EAFBDCD2227D01D009D8D43 /* bekobe.scnassets in Resources */,
 				4E32B434222368FC001EF0F7 /* Assets.xcassets in Resources */,
 				4E32B432222368FB001EF0F7 /* Main.storyboard in Resources */,
 			);
