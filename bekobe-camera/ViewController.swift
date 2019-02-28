@@ -29,6 +29,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = SCNScene()
+
+        // Add light
+        let lightNode = SCNNode()
+        lightNode .light = SCNLight()
+        lightNode .light!.type = .omni
+        lightNode .position = SCNVector3(x: 0, y: 0, z: 1)
+        sceneView.scene.rootNode.addChildNode(lightNode)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +107,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let geometryPlaneNode = SCNNode(geometry: planeGeometory)
         geometryPlaneNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
         geometryPlaneNode.eulerAngles.x = -.pi / 2
-        geometryPlaneNode.opacity = 0.5
+        geometryPlaneNode.opacity = 0.2
         
         node.addChildNode(geometryPlaneNode)
     }
