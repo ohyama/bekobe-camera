@@ -33,6 +33,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image" width="750" height="1334"/>
+        <image name="Image" width="640" height="1136"/>
     </resources>
 </document>
