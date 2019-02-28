@@ -23,11 +23,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        // Create a new scene
-        let scene = SCNScene(named: "bekobe.scnassets/bekobe.scn")!
+        // Add tap gesture
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
         
         // Set the scene to the view
-        sceneView.scene = scene
+        sceneView.scene = SCNScene()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +64,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return node
     }
 */
+    @objc func tapped(recognizer: UIGestureRecognizer) {
+        
+        let view = recognizer.view as! ARSCNView
+        let touchLocation = recognizer.location(in: view)
+        
+        let hitTestResult = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+        
+        if hitTestResult.isEmpty == false {
+            if let result = hitTestResult.first {
 
+                let transform = result.worldTransform
+                let thirdColumn = transform.columns.3
+                
+                // Create a new scene
+                let scene = SCNScene(named: "bekobe.scnassets/bekobe.scn")!
+                let item = scene.rootNode.childNode(withName: "bekobe", recursively: true)!
+                item.position = SCNVector3(thirdColumn.x, thirdColumn.y, thirdColumn.z)
+                sceneView.scene.rootNode.addChildNode(item)
+            }
+        }
+    }
+    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else {
             print("Error: This anchor is not ARPlaneAnchor. [\(#function)]")
